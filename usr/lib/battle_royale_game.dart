@@ -5,10 +5,6 @@ import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 
 // Main game class for the battle royale prototype
-typedef DragUpdateInfo = PanDragUpdateInfo;
-
-typedef TapDownInfo = TapDownInfo; // reuse Flame's TapDetector info 
-
 class BattleRoyaleGame extends FlameGame with PanDetector, TapDetector {
   late Player _player;
 
