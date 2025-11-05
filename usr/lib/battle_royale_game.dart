@@ -1,11 +1,10 @@
 import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
-import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 
 // Main game class for the battle royale prototype
-class BattleRoyaleGame extends FlameGame with PanDetector, TapDetector {
+class BattleRoyaleGame extends FlameGame {
   late Player _player;
 
   @override
@@ -19,16 +18,16 @@ class BattleRoyaleGame extends FlameGame with PanDetector, TapDetector {
     add(_player);
   }
 
-  @override
-  void onPanUpdate(DragUpdateInfo info) {
-    // Drag to move the player
-    _player.position.add(info.delta.game);
+  // Method to handle pan updates from Flutter's GestureDetector
+  void handlePanUpdate(Offset delta) {
+    // Move the player by the drag delta
+    _player.position.add(Vector2(delta.dx, delta.dy));
   }
 
-  @override
-  void onTapDown(TapDownInfo info) {
-    // Tap to shoot towards tap position
-    _player.shoot(info.eventPosition.game);
+  // Method to handle tap down events from Flutter's GestureDetector
+  void handleTapDown(Offset localPosition) {
+    // Shoot towards the tap position converted to game coordinates
+    _player.shoot(Vector2(localPosition.dx, localPosition.dy));
   }
 }
 
